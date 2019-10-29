@@ -1,0 +1,22 @@
+{
+  "name": "typetokorean-server",
+  "version": "1.0.0",
+  "description": "TypeToKorean-server",
+  "author": "Sanghoon Han, Hongsik Kim, Dongho Sin",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestates/TypeToKorean-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codestates/TypeToKorean-server/issues"
+  },
+  "homepage": "https://github.com/codestates/TypeToKorean-server#readme"
+}
