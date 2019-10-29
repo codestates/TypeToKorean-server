@@ -7,6 +7,15 @@
 # ignore all .pdf files in the doc/ directory => doc/**/*.pdf
 
 
+# dependencies
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
 
 ### NPM ###
 npm-debug.log
