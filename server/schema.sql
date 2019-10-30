@@ -1,3 +1,4 @@
+DROP DATABASE typeToKorean;
 CREATE DATABASE typeToKorean;
 USE typeToKorean;
 
