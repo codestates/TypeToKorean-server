@@ -22,7 +22,7 @@ app.use(cors());
 app.use('/', router);
 
 app.get('/', (req, res) => {
-  res.status(200).send('HelloWorld!, This is a TypeToKorean');
+  res.status(200).send('HelloWorld!, This is a TypeToKorean!');
 });
   
   
