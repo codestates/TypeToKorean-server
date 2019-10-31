@@ -8,9 +8,12 @@ const parser = require("body-parser");
 
 //Router
 const router = require("./routes.js");
-
 const app = express();
 const port = 5000;
+
+//db access
+const db = require('./db');
+
 
 app.set("port", port); // Set app, 5000 port;
 console.log('server is listen on',port);
