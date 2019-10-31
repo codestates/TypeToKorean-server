@@ -1,30 +1,31 @@
-const express = require("express");
 const http = require("http");
-
-//Middleware
+const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 const morgan = require("morgan");
 const parser = require("body-parser");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const crypto = require("crypto");
-
-//Router
 const router = require("./routes.js");
 const app = express();
 const port = 5000;
 
-//db access
-const db = require('./db');
+//db access => use sequelize
+// const db = require('./db');
 
 
 app.set("port", port); // Set app, 5000 port;
 console.log('server is listen on',port);
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(parser.json());
+app.use(parser.urlencoded({ extended: false }));
 app.use(cors());
-
+app.use(
+  session({
+    secret: "@typeToKorean"
+  })
+);
 app.use('/', router);
 
 app.get('/', (req, res) => {
@@ -32,13 +33,13 @@ app.get('/', (req, res) => {
 });
   
   
-  app.get('/test', async (req, res) => {
-    res.json({ message: 'pass!' });
-  });
+app.get('/test', async (req, res) => {
+  res.json({ message: 'pass!' });
+});
   
   
-  app.listen(app.get("port"));
-  
-  module.exports = app;
+app.listen(app.get('port'));
+
+module.exports = app;
 
 
