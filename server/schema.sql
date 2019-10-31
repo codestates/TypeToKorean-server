@@ -5,8 +5,8 @@ USE typeToKorean;
 CREATE TABLE users (
   id int PRIMARY KEY AUTO_INCREMENT,
   username varchar(255),
-  created_at timestamp,
-  password varchar(255),
+  created_at VARCHAR(255),
+  pw varchar(255),
   email varchar(255),
   phone varchar(255),
   image varchar(255)
