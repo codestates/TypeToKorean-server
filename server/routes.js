@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {  // 회원 로그인
 
   if (!findUser) {
     // USERNAME NOT FOUND
-    res.status(200).send("USERNAME NOT FOUND");
+    res.status(400).send("USERNAME NOT FOUND");
   }
 
   if (findUserAndPassword[0].dataValues.pw === hashPass) {
@@ -69,7 +69,7 @@ router.post('/login', async (req, res) => {  // 회원 로그인
     console.log("sesschange", sess);
   } else {
     // req.id 랑 pw가 다른 경우
-    res.status(200).send("Wrong Access");
+    res.status(400).send("Wrong Access");
   }
 });
 //회원 로그인
