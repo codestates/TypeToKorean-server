@@ -1,6 +1,5 @@
 const http = require("http");
 const express = require("express");
-const session = require("express-session");
 const cors = require("cors");
 const morgan = require("morgan");
 const parser = require("body-parser");
@@ -8,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const router = require("./routes.js");
 const app = express();
 const port = 5000;
-
+const session = require("express-session");
 //db access => use sequelize
 // const db = require('./db');
 
@@ -21,11 +20,13 @@ app.use(cookieParser());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 app.use(cors());
+
 app.use(
   session({
-    secret: "@typeToKorean"
-  })
+    secret: '@typeToKorean',
+  }),
 );
+
 app.use('/', router);
 
 app.get('/', (req, res) => {
