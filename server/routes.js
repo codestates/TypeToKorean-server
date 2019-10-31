@@ -72,9 +72,24 @@ router.post('/login', async (req, res) => {  // 회원 로그인
     res.status(400).send("Wrong Access");
   }
 });
-//회원 로그인
-// router.post('/logout', controller.logout.post);
-//회원 로그아웃
+
+router.post('/logout', async (req, res) => {  //회원 로그아웃
+  let sess = req.session;
+  if (sess.email) {
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log('Please check whether you logged in or not.', err);
+      } else {
+        console.log('OK');
+        res.redirect('/');
+      }
+    });
+  } else {
+    console.log('!sess.email');
+    res.redirect('/');
+  }
+});
+
 // router.get('/typeInformation', controller.typeInformation.get);
 // //회원의 타자정보
 // router.post('/typeInformation', controller.typeInformation.post);
