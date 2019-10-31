@@ -9,6 +9,8 @@ CREATE TABLE users (
   pw varchar(255),
   email varchar(255),
   phone varchar(255),
+  loginlately VARCHAR(255),
+  logoutlately VARCHAR(255),
   image varchar(255)
 );
 
