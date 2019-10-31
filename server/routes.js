@@ -1,15 +1,33 @@
 var router = require('express').Router();
-var controller = require('./controllers');
+const usersTable = require("../models").users;
+const typeInformation = require("../models").urls;
 
-router.get('/users', controller.users.get);
+// router.get('/users', controller.users.get);
 //회원전체 정보 
-router.get('/users/id', controller.userId.get);
+// router.get('/users/id', controller.userId.get);
 //회원 한명(id) 정보
-router.post('/users', controller.users.post);
+router.post('/users', async (req, res) => {
+  // console.log("message post!!!")
+  let body = req.body;
+  console.log('req.body : ', body);
+  await usersTable.create({
+    email: body.email,
+    username: body.username,
+    pw: body.pw,
+    phone: body.phone,
+    created_at: body.created_at
+  });
+  let returnMessage = await usersTable.findAll({
+    where: {
+      email: body.email,
+    }
+  });
+  res.status(200).send(returnMessage[0]);
+});
 //회원 가입
-router.post('/login', controller.login.post);
+// router.post('/login', controller.login.post);
 //회원 로그인
-router.post('/logout', controller.logout.post);
+// router.post('/logout', controller.logout.post);
 //회원 로그아웃
 // router.get('/typeInformation', controller.typeInformation.get);
 // //회원의 타자정보
