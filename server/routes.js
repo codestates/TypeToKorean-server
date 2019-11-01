@@ -5,11 +5,19 @@ const crypto = require("crypto");
 
 
 router.get('/users', async (req, res) => {     //회원전체 정보 
-    let returnMessage = await usersTable.findAll();
-    res.status(200).send(returnMessage);
+  let returnMessage = await usersTable.findAll();
+  res.status(200).send(returnMessage);
 });
 
-// router.get('/users/id', controller.userId.get);
+router.get('/users/id', async (req, res) => {
+  let sessionData = req.session;
+  let userInfo = await usersTable.findAll({
+    where: {
+      email: sessionData.email
+    }
+  });
+  res.status(200).send(userInfo[0]);
+});
 //회원 한명(id) 정보
 
 router.post('/users', async (req, res) => {   //회원 가입
@@ -36,13 +44,12 @@ router.post('/login', async (req, res) => {  // 회원 로그인
 
   let body = req.body;
   let sess = req.session;
-  console.log("body :",body);
-  console.log("sess", sess);
+  
   let hashPass = body.pw;
   var shasum = crypto.createHash("sha1");
   shasum.update(hashPass);
   hashPass = shasum.digest("hex").slice(0, 5);
-  console.log("크립토암호화:",hashPass)
+  
 
   let findUserAndPassword = await usersTable.findAll({
     where: {
@@ -64,8 +71,12 @@ router.post('/login', async (req, res) => {  // 회원 로그인
 
   if (findUserAndPassword[0].dataValues.pw === hashPass) {
     sess.email = body.email;
-    let userId = { id: findUserAndPassword[0].dataValues.id };
-    res.status(200).send(userId);
+    let userData = {};
+    userData["id"] = findUserAndPassword[0].dataValues.id;
+    userData["username"] = findUserAndPassword[0].dataValues.username;
+    userData["image"] = findUserAndPassword[0].dataValues.image;
+    // db에서 id, username, image 제공
+    res.status(200).send(userData);
     console.log("sesschange", sess);
   } else {
     // req.id 랑 pw가 다른 경우
