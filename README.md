@@ -9,5 +9,7 @@ Codestates IM 15 2 Weeks Project
 -check mysql(mysql -u root -p를 치면 접근이 되는지 확인해주세요.)
 -in mysql, show databases;
  =>typeToKorean이 있는 지 확인 해주세요. (없으면 CREATE DATABASE typeToKorean 을 mysql에서 진행 해주세요.)
+
+ package.json을 확인해 주세요.
  -npm run dev => run nodemon
  -npm run start => run node.js
