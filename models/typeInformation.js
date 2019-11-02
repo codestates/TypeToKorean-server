@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       score: DataTypes.INTEGER,
       typo: DataTypes.INTEGER,
       totaltime: DataTypes.INTEGER,
-      userid: DataTypes.INTEGER,
+      user_id:{
+        type: DataTypes.INTEGER,
+        required: true,
+        allowNull: false
+      }
       // code: DataTypes.STRING
     }
   );
