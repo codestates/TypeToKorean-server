@@ -58,7 +58,8 @@ router.post('/login', async (req, res) => {  // 회원 로그인
   });
   console.log("findUser :::",findUser)
 
-  if(!findUser[0]){
+  if(!findUser[0]){ 
+    //not user
     res.status(400).send("UserNotFound");
   }
 
@@ -72,10 +73,12 @@ router.post('/login', async (req, res) => {  // 회원 로그인
   console.log("fuap",findUserAndPassword);
  
   if(!findUserAndPassword[0]) {
+    //password error!
     return res.status(400).send("Wrong Access")
   }
 
   if (findUserAndPassword[0].dataValues.pw === hashPass) {
+    //right access
     sess.email = body.email;
     let userData = {};
     userData["id"] = findUserAndPassword[0].dataValues.id;
