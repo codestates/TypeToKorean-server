@@ -9,7 +9,7 @@ router.get('/users', async (req, res) => {     //회원전체 정보
   res.status(200).send(returnMessage);
 });
 
-router.get('/users/id', async (req, res) => {
+router.get('/users/id', async (req, res) => {  //회원 한명(id) 정보
   let sessionData = req.session;
   let userInfo = await usersTable.findAll({
     where: {
@@ -18,7 +18,7 @@ router.get('/users/id', async (req, res) => {
   });
   res.status(200).send(userInfo[0]);
 });
-//회원 한명(id) 정보
+
 
 router.post('/users', async (req, res) => {   //회원 가입
   // console.log("message post!!!")
