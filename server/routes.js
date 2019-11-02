@@ -51,6 +51,18 @@ router.post('/login', async (req, res) => {  // 회원 로그인
   hashPass = shasum.digest("hex").slice(0, 5);
   
 
+  let findUser = await usersTable.findAll({
+    where: {
+      email: body.email
+    }
+  });
+  console.log("findUser :::",findUser)
+
+  if(!findUser[0]){
+    res.status(400).send("UserNotFound");
+  }
+
+
   let findUserAndPassword = await usersTable.findAll({
     where: {
       email: body.email,
@@ -58,15 +70,9 @@ router.post('/login', async (req, res) => {  // 회원 로그인
     }
   });
   console.log("fuap",findUserAndPassword);
-  let findUser = await usersTable.findAll({
-    where: {
-      email: body.email
-    }
-  });
-
-  if (!findUser) {
-    // USERNAME NOT FOUND
-    res.status(400).send("USERNAME NOT FOUND");
+ 
+  if(!findUserAndPassword[0]) {
+    return res.status(400).send("Wrong Access")
   }
 
   if (findUserAndPassword[0].dataValues.pw === hashPass) {
@@ -78,10 +84,9 @@ router.post('/login', async (req, res) => {  // 회원 로그인
     // db에서 id, username, image 제공
     res.status(200).send(userData);
     console.log("sesschange", sess);
-  } else {
-    // req.id 랑 pw가 다른 경우
-    res.status(400).send("Wrong Access");
   }
+
+ 
 });
 
 router.post('/logout', async (req, res) => {  //회원 로그아웃
