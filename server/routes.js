@@ -24,6 +24,17 @@ router.post('/users', async (req, res) => {   //회원 가입
   // console.log("message post!!!")
   let body = req.body;
   console.log('req.body : ', body);
+  let userExistMessage = await usersTable.findAll({
+    where: {
+      email: body.email,
+    }
+  });
+
+  if(userExistMessage[0]){
+    return res.status(400).send('Same E-MAIL EXIST');
+  }
+
+
   await usersTable.create({
     email: body.email,
     username: body.username,
