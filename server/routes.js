@@ -20,10 +20,21 @@ router.get('/users/id', async (req, res) => {  //회원 한명(id) 정보
 });
 
 
-router.post('/users', async (req, res) => {   //회원 가입
+router.post('/signin', async (req, res) => {   //회원 가입
   // console.log("message post!!!")
   let body = req.body;
   console.log('req.body : ', body);
+
+  let userExistMessage = await usersTable.findAll({
+    where: {
+      email: body.email,
+    }
+  });
+
+  if(userExistMessage[0]){
+    return res.status(400).send('Same E-MAIL EXIST');
+  }
+
   await usersTable.create({
     email: body.email,
     username: body.username,
@@ -39,6 +50,51 @@ router.post('/users', async (req, res) => {   //회원 가입
   res.status(200).send(returnMessage[0]);
 });
 
+
+router.post('/signout', async (req, res) => { //회원 탈퇴
+  let body = req.body;
+  let sess = req.session;
+  
+  let hashPass = body.pw;
+  var shasum = crypto.createHash("sha1");
+  shasum.update(hashPass);
+  hashPass = shasum.digest("hex").slice(0, 5);
+
+  let findUser = await usersTable.findAll({
+    where: {
+      email: body.email
+    }
+  });
+
+  if(!findUser[0]){ 
+    //not user
+    res.status(400).send("UserNotFound");
+  }
+
+  let findUserAndPassword = await usersTable.findAll({
+    where: {
+      email: body.email,
+      pw: hashPass
+    }
+  });
+
+  if(!findUserAndPassword[0]) {
+    //password error!
+    return res.status(400).send("Wrong Access")
+  }
+
+  if (findUserAndPassword[0].dataValues.pw === hashPass) {
+    //right access
+    let removeUser = await usersTable.destroy({
+      where: {
+        email: body.email,
+        pw: hashPass
+      }
+    });
+    res.status(200).send("This user's data removed");
+  }
+
+});
 
 router.post('/login', async (req, res) => {  // 회원 로그인
 
