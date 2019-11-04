@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       score: DataTypes.INTEGER,
       typo: DataTypes.INTEGER,
       totaltime: DataTypes.INTEGER,
-      user_id:{
+      userId:{
         type: DataTypes.INTEGER,
         required: true,
         allowNull: false
