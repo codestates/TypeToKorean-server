@@ -7,6 +7,8 @@ module.exports = {
 
       let body = req.body;
       let sess = req.session;
+      let timeCheck = new Date().toString();
+      console.log("timeCheck :::", timeCheck);
 
       let hashPass = body.pw;
       var shasum = crypto.createHash('sha1');
@@ -16,7 +18,6 @@ module.exports = {
       let findUser = await usersTable.findAll({
         where: { email: body.email }
       });
-      console.log('findUser :::', findUser);
 
       if (!findUser[0]) {     //not user
         res.status(400).send('UserNotFound');
@@ -42,7 +43,6 @@ module.exports = {
         userData['image'] = findUserAndPassword[0].dataValues.image;
         // db에서 id, username, image 제공
         res.status(200).send(userData);
-        console.log('sesschange', sess);
       }
     }
   },
@@ -50,6 +50,8 @@ module.exports = {
   logOut: {     //회원 로그아웃
     post: async (req, res) => {
       let sess = req.session;
+      let logOutLately = new Date();
+      
       if (sess.email) {
         req.session.destroy(function(err) {
           if (err) {
