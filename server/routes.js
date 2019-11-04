@@ -3,6 +3,7 @@ const controllerUsers = require("./controller/users");
 const controllerSign = require("./controller/signInAndOut");
 const controllerLog = require("./controller/logInAndOut");
 const controllerTypeInfo = require("./controller/typeInfo");
+const controllerSample = require("./controller/sampleData");
 
 
 router.get('/users', controllerUsers.users.get);
@@ -14,6 +15,7 @@ router.post('/logout', controllerLog.logOut.post);
 router.get('/typeInformation', controllerTypeInfo.data.get);
 router.get('/typeInformation/id', controllerTypeInfo.user.get);
 router.post('/typeInformation/id', controllerTypeInfo.user.post);
+router.get('/sample', controllerSample.data.get);
 
 
 // router.get('/profile', controller.profile.get);
