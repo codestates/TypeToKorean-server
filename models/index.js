@@ -40,8 +40,10 @@ db.Sequelize = Sequelize;
 
 //users
 db.users.hasMany(db.typeInformation);
+db.users.hasMany(db.customData);
 
 //typeInformation
 db.typeInformation.belongsTo(db.users);
+db.customData.belongsTo(db.users);
 
 module.exports = db;
