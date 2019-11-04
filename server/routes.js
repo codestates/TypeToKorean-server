@@ -1,10 +1,7 @@
 var router = require('express').Router();
-const usersTable = require("../models").users;
-const typeInformation = require("../models").typeInformation;
 const controllerUsers = require("./controller/users");
 const controllerSign = require("./controller/signInAndOut");
 const controllerLog = require("./controller/logInAndOut");
-const crypto = require("crypto");
 
 
 router.get('/users', controllerUsers.users.get);
