@@ -7,8 +7,10 @@ module.exports = {
 
       let body = req.body;
       let sess = req.session;
-      let timeCheck = new Date().toString();
-      console.log("timeCheck :::", timeCheck);
+      
+      if(sess.email){
+        res.status(400).send("Already logged in status")
+      }
 
       let hashPass = body.pw;
       var shasum = crypto.createHash('sha1');
@@ -29,7 +31,6 @@ module.exports = {
           pw: hashPass
         }
       });
-      console.log('fuap', findUserAndPassword);
 
       if (!findUserAndPassword[0]) {         //password error!
         return res.status(400).send('Wrong Access');
@@ -51,18 +52,20 @@ module.exports = {
     post: async (req, res) => {
       let sess = req.session;
       let logOutLately = new Date();
+
+      if(!sess.email){
+        res.status(400).send("Not logged in status")
+      }
       
       if (sess.email) {
         req.session.destroy(function(err) {
           if (err) {
             console.log('Please check whether you logged in or not.', err);
           } else {
-            console.log('OK');
             res.redirect('/');
           }
         });
       } else {
-        console.log('!sess.email');
         res.redirect('/');
       }
     }

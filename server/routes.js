@@ -2,6 +2,7 @@ var router = require('express').Router();
 const controllerUsers = require("./controller/users");
 const controllerSign = require("./controller/signInAndOut");
 const controllerLog = require("./controller/logInAndOut");
+const controllerTypeInfo = require("./controller/typeInfo");
 
 
 router.get('/users', controllerUsers.users.get);
@@ -10,7 +11,7 @@ router.post('/signin', controllerSign.signin.post);
 router.post('/signout', controllerSign.signout.post);
 router.post('/login', controllerLog.logIn.post);
 router.post('/logout', controllerLog.logOut.post);
-
+router.get('/typeInformation', controllerTypeInfo.data.get);
 // router.get('/typeInformation', controller.typeInformation.get);
 // //회원의 타자정보
 // router.post('/typeInformation', controller.typeInformation.post);
