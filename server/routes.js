@@ -3,6 +3,7 @@ const controllerUsers = require("./controller/users");
 const controllerSign = require("./controller/signInAndOut");
 const controllerLog = require("./controller/logInAndOut");
 const controllerTypeInfo = require("./controller/typeInfo");
+const controllerSample = require("./controller/sampleData");
 
 
 router.get('/users', controllerUsers.users.get);
@@ -12,10 +13,11 @@ router.post('/signout', controllerSign.signout.post);
 router.post('/login', controllerLog.logIn.post);
 router.post('/logout', controllerLog.logOut.post);
 router.get('/typeInformation', controllerTypeInfo.data.get);
-// router.get('/typeInformation', controller.typeInformation.get);
-// //회원의 타자정보
-// router.post('/typeInformation', controller.typeInformation.post);
-// //회원의 타자정보 추가
+router.get('/typeInformation/id', controllerTypeInfo.user.get);
+router.post('/typeInformation/id', controllerTypeInfo.user.post);
+router.get('/sample', controllerSample.data.get);
+
+
 // router.get('/profile', controller.profile.get);
 // //로그인을 한 회원의 상세 정보
 // router.get('/statistics', controller.statistics.get);
