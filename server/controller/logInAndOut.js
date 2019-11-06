@@ -65,9 +65,7 @@ module.exports = {
             res.redirect('/');
           }
         });
-      } else {
-        res.redirect('/');
-      }
+      } 
     }
   }
 };
