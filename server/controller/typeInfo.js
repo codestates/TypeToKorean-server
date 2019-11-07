@@ -27,6 +27,7 @@ module.exports = {
       // 회원의 타자 정보 입력
       let body = req.body;
       let sessionData = req.session;
+      console.log("session :::", sessionData);
       let user = await usersTable.find({
         where: { email: sessionData.email }
       });
