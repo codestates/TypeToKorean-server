@@ -19,11 +19,20 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 app.use(
   session({
-    secret: '@typeToKorean'
+    key: "b6",
+    secret: '@typeToKorean',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60
+    }
   }),
 );
 
@@ -34,7 +43,7 @@ app.get('/', (req, res) => {
 });
   
   
-app.get('/test', async (req, res) => {
+app.get('/test', async (req, res) => { 
   res.json({ message: 'pass!' });
 });
   

@@ -7,7 +7,7 @@ module.exports = {
 
       let body = req.body;
       let sess = req.session;
-      
+      console.log("sess::",sess)
       if(sess.email){
         res.status(400).send("Already logged in status")
       }
@@ -37,12 +37,14 @@ module.exports = {
       }
 
       if (findUserAndPassword[0].dataValues.pw === hashPass) {      //right access
+        
         sess.email = body.email;
         let userData = {};
         userData['id'] = findUserAndPassword[0].dataValues.id;
         userData['username'] = findUserAndPassword[0].dataValues.username;
         userData['image'] = findUserAndPassword[0].dataValues.image;
         // db에서 id, username, image 제공
+        req.session.email = body.email;
         res.status(200).send(userData);
       }
     }
@@ -52,6 +54,7 @@ module.exports = {
     post: async (req, res) => {
       let sess = req.session;
       let logOutLately = new Date();
+      console.log("sess::",sess)
 
       if(!sess.email){
         res.status(400).send("Not logged in status")
