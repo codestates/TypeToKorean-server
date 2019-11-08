@@ -3,8 +3,8 @@ const usersTable = require("../../models").users;
 
 
 module.exports = {
-    data: {
-        get: async (req, res) => {          
+    data: {     
+        get: async (req, res) => {            //유저의 상세정보     
             let sessionData = req.session;
             let userData = await usersTable.find({
                 where:{ email: sessionData.email }
