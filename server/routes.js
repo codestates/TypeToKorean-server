@@ -5,6 +5,7 @@ const controllerLog = require("./controller/logInAndOut");
 const controllerTypeInfo = require("./controller/typeInfo");
 const controllerSample = require("./controller/sampleData");
 const controllerProfile = require("./controller/profile");
+const controllerStatistic = require("./controller/statistics");
 
 
 router.get('/users', controllerUsers.users.get);
@@ -18,12 +19,9 @@ router.get('/typeInformation/id', controllerTypeInfo.user.get);
 router.post('/typeInformation/id', controllerTypeInfo.user.post);
 router.get('/sample', controllerSample.data.get);
 router.get('/profile', controllerProfile.data.get);
+router.get('/statistics', controllerStatistic.data.get);
 
 
-// router.get('/profile', controller.profile.get);
-// //로그인을 한 회원의 상세 정보
-// router.get('/statistics', controller.statistics.get);
-// //전체 통계 값
 
 
 module.exports = router;

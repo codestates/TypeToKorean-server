@@ -1,16 +1,17 @@
-
+const infoTable = require("../../models").typeInformation;
+const usersTable = require("../../models").users;
 
 module.exports = {
-    users: {
-        get: async (res, req) => { 
-            let totalUserData = await  usersTable.findAll();
-            let totalUser = totalUserData.length;
-            let totalStatistics = function(){
-                for(let i=0; i<totalUser; i++){
-                                   
-                }
-            }
+    data: {
+        get: async (req, res) => { 
+            
+            let infoData = await infoTable.findAll({
+                attributes: ["id","typeSpeed","userId"]
+            });
 
+            console.log("info:::", infoData[0])
+
+            res.status(200).send(infoData);
 
         }
     }
