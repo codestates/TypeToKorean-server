@@ -17,7 +17,9 @@ router.post('/logout', controllerLog.logOut.post);
 router.get('/typeInformation', controllerTypeInfo.data.get);
 router.get('/typeInformation/id', controllerTypeInfo.user.get);
 router.post('/typeInformation/id', controllerTypeInfo.user.post);
-router.get('/sample', controllerSample.data.get);
+router.get('/sample/short', controllerSample.dataSh.get);
+router.get('/sample/shortEn', controllerSample.dataSh2.get);
+router.get('/sample/long', controllerSample.dataLO.get);
 router.get('/profile', controllerProfile.data.get);
 router.get('/statistics', controllerStatistic.data.get);
 
