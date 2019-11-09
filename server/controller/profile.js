@@ -31,6 +31,7 @@ module.exports = {
                 totalTime: 0,
                 totalScore: 0,
                 avgTypeSpeed: 0,
+                bestTypeSpeed: 0,
                 totalTypo: 0,
                 avgTypo: 0,
             };
@@ -40,6 +41,9 @@ module.exports = {
                 userProfile.totalScore += findScoreData[i].score;
                 userProfile.avgTypeSpeed += findScoreData[i].typeSpeed;
                 userProfile.totalTypo += findScoreData[i].typo;
+                if(userProfile.bestTypeSpeed < findScoreData[i].typeSpeed){
+                    userProfile.bestTypeSpeed = findScoreData[i].typeSpeed;
+                }
             };
             userProfile.avgTypeSpeed = userProfile.avgTypeSpeed/findScoreData.length;
             userProfile.avgTypo = userProfile.totalTypo/findScoreData.length;
