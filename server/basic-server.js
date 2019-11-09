@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 app.use(cors({
-  origin: "http://typetokoreanclient.s3-website.ap-northeast-2.amazonaws.com",
+  origin: "http://localhost:3000",
   credentials: true
 }));
 

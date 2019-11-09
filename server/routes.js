@@ -6,6 +6,7 @@ const controllerTypeInfo = require("./controller/typeInfo");
 const controllerSample = require("./controller/sampleData");
 const controllerProfile = require("./controller/profile");
 const controllerStatistic = require("./controller/statistics");
+const controllerBestUser = require("./controller/bestUserChart");
 
 
 router.get('/users', controllerUsers.users.get);
@@ -22,6 +23,8 @@ router.get('/sample/shortEn', controllerSample.dataSh2.get);
 router.get('/sample/long', controllerSample.dataLO.get);
 router.get('/profile', controllerProfile.data.get);
 router.get('/statistics', controllerStatistic.data.get);
+router.get('/getBestUser', controllerBestUser.data.get);
+
 
 
 
